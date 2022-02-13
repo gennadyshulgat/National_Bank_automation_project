@@ -30,3 +30,18 @@ When(/^Проверили что текущий курс доллара боль
     raise "ERROR текущий курс меньше #{max_course}"
   end
 end
+
+When(/^получили значение даты на которую установлены курсы валют$/) do
+  current_date_element = $driver.find_element(:xpath,"//*[@id='curDate']")
+  @current_date = current_date_element.text
+end
+
+When(/^Проверили что дата соответствует текущей$/) do
+  # if Date.parse(@current_date) >= DateTime.now.to_date
+  #   puts "FINE"
+  # else
+  #   raise "ERROR дата не актуальная"
+  # end
+
+  raise "ERROR дата не актуальная" if Date.parse(@current_date) <= DateTime.now.to_date
+end
